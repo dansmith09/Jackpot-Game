@@ -2,6 +2,7 @@
   text-align: center;
   padding: 0;
   margin: 0;
+  /* border: solid red 1px; */
 }
 .appContainer {
   transition: 0.4s;
@@ -23,6 +24,9 @@
 h1{
   margin-top: 40px;
   color: #FFFFF0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .number {
   border: solid 2px black;
@@ -91,4 +95,61 @@ h1{
 .none {
   transition: 0.4s;
   display: none;
+}
+.helpIcon {
+  transition: 0.3s;
+  color: #FFFFF0;
+  margin-left: 20px;
+}
+.helpIcon:hover {
+  color: #21aed4;
+}
+/* Modal Styling */
+.rulesModalContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.overlay {
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgb(46, 45, 45);
+  opacity: .6;
+}
+.rulesModal {
+  position: absolute;
+  top: 10vh;
+  left: calc(50vw - 200px);
+  width: 320px;
+  height: 500px;
+  margin: 10px;
+  margin-left: 20px;
+  margin-right: 20px;
+  background-color: #63d7f7;
+  padding: 20px;
+  border-radius: 10px;
+}
+.rulesModal > h3 {
+  margin: 10px;
+}
+.rulesModal > p {
+  margin-bottom: 30px;
+}
+.rulesModal:last-child {
+  padding-bottom: 30px;
+}
+.exitModal{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  height: 30px;
+  width: 30px;
+  color: rgb(229, 109, 109);
+  background-color: white;
+  border-radius: 50%;
 }

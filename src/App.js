@@ -1,8 +1,11 @@
 import './App.css';
+import './App.css';
 import React, { useState, useEffect } from 'react';
 import { BsQuestionSquare, BsDice1, BsDice2, BsDice3, BsDice4, BsDice5, BsDice6 } from 'react-icons/bs'
 import { MdReplay } from 'react-icons/md'
-import { HiShare } from 'react-icons/hi'
+import { HiShare } from 'react-icons/hi' 
+import { FiHelpCircle } from 'react-icons/fi' 
+import { AiFillCloseCircle } from 'react-icons/ai' 
 import Confetti from './Confetti';
 
 function App() {
@@ -20,6 +23,8 @@ function App() {
   const [gameWon, setGameWon] = useState(false)
   const [gameLost, setGameLost] = useState(false)
   const [clipBoardMessage, setClipBoardMessage] = useState(false)
+  // Modal State
+  const [modal, setModal] = useState(false)
 
   const resetDice = () => {
     setDice1Value('?')
@@ -173,6 +178,10 @@ function App() {
     }
   }
 
+  const toggleModal = () => {
+    setModal(!modal)
+  }
+
   useEffect(() => {
     if(!numberArr.length){
       winGame()
@@ -186,8 +195,7 @@ function App() {
     <div className={`appContainer ${gameWon ? 'winBG' : ''} ${gameLost ? 'loseBG' : ''}`}>
       <div className={'subContainer'}>
         {gameWon ? <Confetti className={'confetti'}/> : ''}
-        <h1>Jackpot</h1>
-        <br></br>
+        <h1>Jackpot <FiHelpCircle className={'helpIcon'} onClick={toggleModal}/></h1>
         <div className={'diceContainer'}>
           {renderDice(dice1Value)}
           {renderDice(dice2Value)}
@@ -249,6 +257,33 @@ function App() {
           )}
         </div>
         <p className={clipBoardMessage ? 'clipBoardMessage' : 'clipBoardMessage none'}>Copied to clipboard!</p>
+        {modal &&
+        (<div className={'rulesModalContainer'}>
+            <div className={'overlay'} onClick={toggleModal}></div>
+            <div className={'rulesModal'}>
+                <AiFillCloseCircle
+                className={'exitModal'}
+                onClick={toggleModal}
+                />
+                <p></p>
+                <h3>How To Play</h3>
+                <p>
+                    Begin the game by rolling the dice.
+                    Once the dice have been rolled you have a choice of what number you wish to 'knock down'.
+                    You can choose any number on either dice or the number the two dice add up to.
+                    For example, if I roll a 4 and a 5. I can knock down 4, 5 or 9.
+                </p>
+                <h3>How You Lose</h3>
+                <p>
+                    You lose the game when you roll the dice and you are unable to knock down any numbers.
+                </p>
+                <h3>How You Win</h3>
+                <p>
+                    The game is won when you knock down all of the numbers successfully.
+                    And I can say from personal experience... It is truly glorious!
+                </p>
+            </div>
+        </div>)}
       </div>
     </div>
   );
