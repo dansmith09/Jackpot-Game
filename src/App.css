@@ -2,13 +2,13 @@
   text-align: center;
   padding: 0;
   margin: 0;
+  background: linear-gradient(#373333, #9198e5);
 }
 .appContainer {
   width: 100vw;
   height: 100vh;
   display: flex;
   justify-content: center;
-  background: linear-gradient(#373333, #9198e5);
 }
 .subContainer {
   width: 395px;
