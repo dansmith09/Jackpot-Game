@@ -1,38 +1,76 @@
-.App {
+* {
   text-align: center;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.appContainer {
+  width: 100vw;
+  height: 100vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  background: linear-gradient(#373333, #9198e5);
 }
-
-.App-link {
-  color: #61dafb;
+.subContainer {
+  width: 395px;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+h1{
+  color: #FFFFF0;
+}
+.number {
+  border: solid 2px black;
+  border-radius: 10px;
+  transition: 0.4s;
+  height: 75px;
+  width: 75px;
+  margin: 12px;
+  color: #FFFFF0;
+  font-size: 35px;
+  font-weight: bolder;
+}
+.selected {
+  background-color: #538d4e;
+}
+.unselected {
+  background-color: #b59f3b;
+}
+.diceContainer {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 30px;
+  padding-top: 15px;
+}
+.diceContainer > svg{
+  width: 90px;
+  height: 90px;
+  color: #FFFFF0;
+}
+.wideBtn {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 15px;
+  width: 350px;
+  height: 55px;
+  border-radius: 10px;
+  background-color: #63d7f7;
+  border: #63d7f7;
+  font-size: 20px;
+  transition: 0.4s;
+}
+.wideBtn:active {
+  background-color: #21aed4;
+  border: #21aed4;
+}
+.btnContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.buttonIcons {
+  margin: 10px;
+}
+.confetti {
+  z-index: 0;
+  width: 100vw;
+  height: 100vh;
 }
