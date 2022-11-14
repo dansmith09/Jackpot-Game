@@ -17,7 +17,9 @@ function App() {
   // Game State
   const [gameInProgress, setGameInProgress] = useState(true)
   const [pickingNumber, setPickingNumber] = useState(false)
-  const [gameWon, setGameWon] =useState(false)
+  const [gameWon, setGameWon] = useState(false)
+  const [gameLost, setGameLost] = useState(false)
+  const [clipBoardMessage, setClipBoardMessage] = useState(false)
 
   const resetDice = () => {
     setDice1Value('?')
@@ -88,6 +90,7 @@ function App() {
   const startGame = () => {
     console.log('Game Stared')
     setGameWon(false)
+    setGameLost(false)
     setPickingNumber(false)
     setText(`Jackpot ${date.getDate()}/${date.getMonth()}/${date.getFullYear()}:`);
     setGameInProgress(true)
@@ -140,9 +143,9 @@ function App() {
 
   const loseGame = (dice1, dice2) => {
     setTimeout(() => {
+      setGameLost(true)
       setGameInProgress(false)
       concatLossToText(numberArr, dice1, dice2);
-      // display some element telling user after a time out so they get to realise they lost
     }, 1500)
   }
   
@@ -152,10 +155,11 @@ function App() {
     setGameWon(true)
   }
 
-  const gameOver = () => {
-    console.log('Game Finished')
-    // render share result option
-    // render play again button
+  const handleClipBoardMessage = () => {
+    setClipBoardMessage(true);
+    setTimeout(() => {
+      setClipBoardMessage(false)
+    }, 1500)
   }
 
   const handleShareBtn = () => {
@@ -165,6 +169,7 @@ function App() {
       })
     } else {
       navigator.clipboard.writeText(text)
+      handleClipBoardMessage()
     }
   }
 
@@ -172,16 +177,13 @@ function App() {
     if(!numberArr.length){
       winGame()
     }
-    if(!gameInProgress){
-      gameOver()
-    }
     if(gameInProgress) {
       concatToText(numberArr)
     }
   }, [numberArr, gameInProgress])
 
   return (
-    <div className={'appContainer'}>
+    <div className={`appContainer ${gameWon ? 'winBG' : ''} ${gameLost ? 'loseBG' : ''}`}>
       <div className={'subContainer'}>
         {gameWon ? <Confetti className={'confetti'}/> : ''}
         <h1>Jackpot</h1>
@@ -246,6 +248,7 @@ function App() {
             <button className={'wideBtn '} onClick={rollDice} disabled={pickingNumber ? 'disabled' : ''}><BsDice6 className={'buttonIcons'}/> Roll Dice <BsDice3 className={'buttonIcons'} /></button>
           )}
         </div>
+        <p className={clipBoardMessage ? 'clipBoardMessage' : 'clipBoardMessage none'}>Copied to clipboard!</p>
       </div>
     </div>
   );

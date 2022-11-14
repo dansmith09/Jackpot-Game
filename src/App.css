@@ -2,13 +2,20 @@
   text-align: center;
   padding: 0;
   margin: 0;
-  background: linear-gradient(#373333, #9198e5);
 }
 .appContainer {
+  transition: 0.4s;
   width: 100vw;
   height: 100vh;
   display: flex;
   justify-content: center;
+  background: linear-gradient(#373333, #9198e5);
+}
+.winBG{
+  background: linear-gradient(#2c2a2a, #c1c375);
+}
+.loseBG{
+  background: linear-gradient(#373333, #e59191);
 }
 .subContainer {
   width: 395px;
@@ -58,6 +65,7 @@ h1{
   border: #63d7f7;
   font-size: 20px;
   transition: 0.4s;
+  color: black;
 }
 .wideBtn:active {
   background-color: #21aed4;
@@ -75,5 +83,12 @@ h1{
 .confetti {
   z-index: 0;
   width: 100vw;
-  height: 100vh;
+  height: 120vh;
+}
+.clipBoardMessage {
+  color: #FFFFF0;
+}
+.none {
+  transition: 0.4s;
+  display: none;
 }
