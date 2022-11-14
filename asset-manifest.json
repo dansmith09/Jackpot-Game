@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/Jackpot-Game/static/css/main.652d8a8d.css",
+    "main.css": "/Jackpot-Game/static/css/main.8c76d46d.css",
     "main.js": "/Jackpot-Game/static/js/main.dce2db57.js",
     "index.html": "/Jackpot-Game/index.html",
-    "main.652d8a8d.css.map": "/Jackpot-Game/static/css/main.652d8a8d.css.map",
+    "main.8c76d46d.css.map": "/Jackpot-Game/static/css/main.8c76d46d.css.map",
     "main.dce2db57.js.map": "/Jackpot-Game/static/js/main.dce2db57.js.map"
   },
   "entrypoints": [
-    "static/css/main.652d8a8d.css",
+    "static/css/main.8c76d46d.css",
     "static/js/main.dce2db57.js"
   ]
 }
