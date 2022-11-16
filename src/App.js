@@ -102,6 +102,8 @@ function App() {
   }
 
   const startGame = () => {
+    setTimer(false)
+    setSeconds(0)
     setGameWon(false)
     setGameLost(false)
     setPickingNumber(false)
@@ -149,7 +151,7 @@ function App() {
 
   const concatWinToText = () => {
     let oldText = text;
-    let newText = oldText += `\n🏆🎉🏆You Won!!🏆🎉🏆\n🎉⏱ In ${seconds.toFixed(2)} seconds! ⏱🎉\n`
+    let newText = oldText += `\n🏆🎉🏆You Won!!🏆🎉🏆\n  ⏱ In ${seconds.toFixed(2)} seconds! ⏱🎉\n`
     setText(newText);
   }
 
