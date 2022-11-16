@@ -149,7 +149,7 @@ function App() {
 
   const concatWinToText = () => {
     let oldText = text;
-    let newText = oldText += `\n🏆🎉🏆You Won!!🏆🎉🏆\n🎉⏱ In ${seconds} seconds! ⏱🎉\n`
+    let newText = oldText += `\n🏆🎉🏆You Won!!🏆🎉🏆\n🎉⏱ In ${seconds.toFixed(2)} seconds! ⏱🎉\n`
     setText(newText);
   }
 
@@ -196,8 +196,8 @@ function App() {
   // TIMER FUNCTIONS
   const startTimer = () => {
     timerId.current = setInterval(() => {
-      setSeconds(prev => prev + 1);
-    }, 1000)
+      setSeconds(prev => prev += 0.01);
+    }, 10)
   }
 
   const stopTimer = () => {
@@ -286,7 +286,7 @@ function App() {
           )}
         </div>
         <p className={clipBoardMessage ? 'clipBoardMessage' : 'clipBoardMessage none'}>Copied to clipboard!</p>
-        {timer ? <p className={'clipBoardMessage'}>{seconds} {seconds === 1 ? 'second' : 'seconds'}</p> : ''}
+        {timer ? <p className={'clipBoardMessage'}>{seconds.toFixed(2)} seconds</p> : ''}
         {modal &&
         (<div className={'rulesModalContainer'}>
             <div className={'overlay'} onClick={toggleModal}></div>
