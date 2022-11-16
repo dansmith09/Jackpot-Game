@@ -1,6 +1,6 @@
 import './App.css';
 import './App.css';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { BsQuestionSquare, BsDice1, BsDice2, BsDice3, BsDice4, BsDice5, BsDice6 } from 'react-icons/bs'
 import { MdReplay } from 'react-icons/md'
 import { HiShare } from 'react-icons/hi' 
@@ -23,6 +23,10 @@ function App() {
   const [gameWon, setGameWon] = useState(false)
   const [gameLost, setGameLost] = useState(false)
   const [clipBoardMessage, setClipBoardMessage] = useState(false)
+  // Timer State and Ref
+  const [timer, setTimer] = useState(false)
+  const [seconds, setSeconds] = useState(0);
+  const timerId = useRef();
   // Modal State
   const [modal, setModal] = useState(false)
 
@@ -36,6 +40,11 @@ function App() {
   }
 
   const rollDice = () => {
+    if(!timer){
+      startTimer()
+      setTimer(true)
+    }
+
     setPickingNumber(true)
     let randomNumber1 = getRandomNumber();
     let randomNumber2 = getRandomNumber();
@@ -93,7 +102,6 @@ function App() {
   }
 
   const startGame = () => {
-    console.log('Game Stared')
     setGameWon(false)
     setGameLost(false)
     setPickingNumber(false)
@@ -137,19 +145,21 @@ function App() {
     let oldText = text;
     let newText = oldText += newLine
     setText(newText)
-    console.log(newText)
   }
 
   const concatWinToText = () => {
     let oldText = text;
-    let newText = oldText += '\n🏆🎉🎉You Won!!🎉🎉🏆'
+    let newText = oldText += `\n🏆🎉🏆You Won!!🏆🎉🏆\n🎉⏱ In ${seconds} seconds! ⏱🎉\n`
     setText(newText);
   }
 
   const loseGame = (dice1, dice2) => {
+
     setTimeout(() => {
-      setGameLost(true)
+      setTimer(false)
+      resetTimer()
       setGameInProgress(false)
+      setGameLost(true)
       concatLossToText(numberArr, dice1, dice2);
     }, 1500)
   }
@@ -158,6 +168,7 @@ function App() {
     setGameInProgress(false)
     concatWinToText()
     setGameWon(true)
+    stopTimer()
   }
 
   const handleClipBoardMessage = () => {
@@ -182,6 +193,24 @@ function App() {
     setModal(!modal)
   }
 
+  // TIMER FUNCTIONS
+  const startTimer = () => {
+    timerId.current = setInterval(() => {
+      setSeconds(prev => prev + 1);
+    }, 1000)
+  }
+
+  const stopTimer = () => {
+    clearInterval(timerId.current);
+    timerId.current = 0;
+  }
+
+  const resetTimer = () => {
+    stopTimer();
+    if (seconds) {
+      setSeconds(0);
+    }
+  }
   useEffect(() => {
     if(!numberArr.length){
       winGame()
@@ -257,6 +286,7 @@ function App() {
           )}
         </div>
         <p className={clipBoardMessage ? 'clipBoardMessage' : 'clipBoardMessage none'}>Copied to clipboard!</p>
+        {timer ? <p className={'clipBoardMessage'}>{seconds} {seconds === 1 ? 'second' : 'seconds'}</p> : ''}
         {modal &&
         (<div className={'rulesModalContainer'}>
             <div className={'overlay'} onClick={toggleModal}></div>
